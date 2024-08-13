@@ -1,18 +1,13 @@
 <template>
-    <div class="text-3xl font-bold underline">
-        Amour
+    <div>
+        <div class="flex flex-row">
+            <div class="basis-1/4">01</div>
+            <div class="basis-1/4">02</div>
+            <div class="basis-1/2">03</div>
+        </div>
     </div>
 </template>
 
-<script setup>
-/* import { useAuthStore } from '@/stores/Auth';
-const AuthStore1 = useAuthStore(); */
-/* import bcrypt  from 'bcryptjs';
-const motpass = "papa";
-const motpasshash = bcrypt.hashSync(motpass);
-console.log(motpasshash)
-const correct = bcrypt.compareSync("papa", motpasshash);
-console.log(correct); */
-</script>
+<script>
 
-<style></style>
+</script>
