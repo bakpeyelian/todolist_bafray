@@ -38,7 +38,18 @@
                     </div>
                 </div>
 
-                <div class="w-full flex justify-center">
+                <div class="w-full flex justify-center gap-2">
+                    <button
+                        class="flex gap-2 items-center bg-white border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 font-bold">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1" />
+                        </svg>
+                        <RouterLink to="/" class="text-black-600 font-semibold hover:underline ml-1">
+                            <span>Back to home</span>
+                        </RouterLink>
+                    </button>
                     <button
                         class="flex gap-2 items-center bg-white border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 font-bold">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -46,7 +57,9 @@
                             <path
                                 d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1z" />
                         </svg>
-                        <span> Create a new account</span>
+                        <RouterLink to="/register" class="text-black-600 font-semibold hover:underline ml-1">
+                            <span>Create a new account</span>
+                        </RouterLink>
                     </button>
                 </div>
 
@@ -57,8 +70,8 @@
 
 <script setup>
 /* import { useAuthStore } from '@/stores/Auth';
-const AuthStore1 = useAuthStore(); */
-/* import bcrypt  from 'bcryptjs';
+const AuthStore1 = useAuthStore();
+import bcrypt  from 'bcryptjs';
 const motpass = "papa";
 const motpasshash = bcrypt.hashSync(motpass);
 console.log(motpasshash)

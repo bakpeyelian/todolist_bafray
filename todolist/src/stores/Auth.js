@@ -22,16 +22,18 @@ export const useAuthStore = defineStore('auth', {
         console.log(error)
       }
     },
+
     addUser(user) {
       try {
-        this.usersTab.unshift(user)
-        localStorage.setItem('usersTab', JSON.stringify(this.usersTab))
+        this.usersTab.unshift(user);
+        localStorage.setItem('usersTab', JSON.stringify(this.usersTab));
         this.usersTab = JSON.parse(localStorage.getItem('usersTab'))
         return true
       } catch (error) {
         console.log(error)
       }
     },
+
     connectUser(email, password) {
       try {
         console.log(email);
@@ -40,9 +42,13 @@ export const useAuthStore = defineStore('auth', {
         console.log(error)
       }
     },
+
     showUser() {},
     editUser() {},
     removeUser() {},
-    logoutUser() {}
+
+    logoutUser() {
+      localStorage.removeItem('userSession');
+    }
   }
 })
