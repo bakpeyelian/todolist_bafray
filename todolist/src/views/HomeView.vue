@@ -13,14 +13,14 @@
                                 tasks, organise them, and filter tasks by status or date.
                             </p>
                             <p class="mt-8 md:mt-12">
-                                <a href="/boardview">
+                                <RouterLink to="/boardview">
                                     <button type="button"
                                         class=" py-3 px-8 text-sm bg-yellow-900 hover:bg-gray-600 rounded text-white ">
                                         GO TO Boards
                                     </button>
-                                </a>
+                                </RouterLink>
                             </p>
-                            <p class="mt-4 text-gray-600">Sed fermentum felis ut cursu
+                            <p class="mt-4 text-gray-600">Save time by working with us
                             </p>
                         </div>
 
