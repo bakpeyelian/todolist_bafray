@@ -144,9 +144,9 @@ const errors = ref([]);
 
 //Verification du fullname
 watch(fullname, (value) => {
-  verifyUsername(value)
+  verifyFullname(value)
 })
-function verifyUsername(value) {
+function verifyFullname(value) {
   const letters = /^[A-Za-z0-9'_\- ]+$/;
   if (value.length < 3 || value.length == 0) {
     errors.value['fullname'] = "fullname too short"
