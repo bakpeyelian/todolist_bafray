@@ -44,9 +44,9 @@ export const useAuthStore = defineStore('auth', {
       // console.log(user)
       this.setAllUser()
       for (let i = 0; i <= this.usersTab.length; i++) {
-        console.log(this.usersTab[i]._rawValue.email)
+        /* console.log(this.usersTab[i]._rawValue.email)
         console.log(bcrypt.compareSync(user['password'], this.usersTab[i]._rawValue.password))
-        console.log(user.email)
+        console.log(user.email) */
         if (
           user.email == this.usersTab[i]._rawValue.email &&
           bcrypt.compareSync(user.password, this.usersTab[i]._rawValue.password)

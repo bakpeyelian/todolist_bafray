@@ -4,7 +4,7 @@
         <div class="bg-gray-200">
             <div class="flex flex-col mx-5 mt-6 lg:flex-row">
                 <div class="w-full lg:w-1/3 m-3">
-                    <form class="w-full bg-white shadow-md p-6 ">
+                    <form class="w-full bg-white shadow-md p-6 " @submit.prevent="">
                         <h1 class="text-center"><strong>Add a task</strong></h1>
                         <br>
                         <div class="flex flex-wrap -mx-3 mb-6">
@@ -46,17 +46,19 @@
                             <div class="w-full md:w-full px-3 mb-6">
                                 <label class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
                                     htmlFor="priority"><strong>priority</strong></label>
-                                <select v-model.trim="priority"
+                                    <span class="text-yellow-900 "> {{ errors.priority }} </span>
+                                <select v-model="priority" 
                                     class="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none focus:border-[#050505]"
                                     required>
-                                    <option value="High">High</option>
-                                    <option value="Medium">Medium</option>
+                                    <option value="">--Please choose an option--</option>
                                     <option value="Low">Low</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="High">High</option>
                                 </select>
                             </div>
 
                             <div class="w-full md:w-full px-3 mb-6">
-                                <button
+                                <button @click="addTask()"
                                     class="appearance-none block w-full bg-yellow-900 text-gray-100 font-bold border border-gray-200 rounded-lg py-3 px-3 leading-tight hover:bg-gray-600 focus:outline-none focus:bg-white focus:border-gray-500">Add
                                     a task</button>
                             </div>
@@ -134,14 +136,43 @@
 </template>
 
 <script setup>
+//import { useTaskStore } from '@/stores/Task';
 import HeaderView from '@/components/HeaderView.vue'
+import router from '@/router';
 import { ref, watch } from 'vue';
+import { onBeforeMount } from 'vue';
 const title = ref('');
 const description = ref('');
 const startDate = ref('');
 const endDate = ref('');
 const priority = ref('');
 const errors = ref([]);
+//const taskStore = useTaskStore();
+
+onBeforeMount(()=>{
+    let isConnect = localStorage.getItem("activeSession") || false;
+    if(isConnect == false){
+        router.push("/login");
+    }
+})
+
+function addTask(){
+    console.log(errors.value.title);
+    if(!errors.value.title && !errors.value.description && !errors.value.startDate && !errors.value.endDate && !errors.value.priority){
+        const onetask = {
+            id: Date.now(),
+            title: title.value,
+            description: description.value,
+            startDate: startDate.value,
+            endDate: endDate.value,
+            priority: priority.value
+        }
+        console.log(onetask)
+        //taskStore.addOneTask(onetask);
+    }else{
+        alert("Invalid enter")
+    }
+}
 
 //verification des entrées
 watch(title, (value) => {
@@ -166,6 +197,10 @@ function verifyDescription(value) {
     }
 }
 
+/* if(!startDate.value){
+    errors.value["startDate"] = "The start date must not be greater than the end date.";
+} */
+
 watch(startDate, (value) => {
     verifystartDate(value)
 })
@@ -185,9 +220,24 @@ function verifyendDate(value){
         errors.value["endDate"] = "The end date must not be less than the start date.";
     } else {
         errors.value["endDate"] = '';
+        errors.value["startDate"] = '';
     }
 }
 
+if(priority.value ===""){
+    errors.value["priority"] = "The priority must be non-empty.";
+}
+
+watch(priority, (value) => {
+    verifyPriority(value)
+})
+function verifyPriority(value){
+    if (value === "") {
+        errors.value["priority"] = "The priority must be non-empty.";
+    } else {
+        errors.value["priority"] = '';
+    }
+}
 </script>
 
 <style scoped></style>

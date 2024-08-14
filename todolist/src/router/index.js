@@ -11,7 +11,6 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
-      /* meta: {authUser:true} */
     },
     {
       path: '/login',
@@ -26,7 +25,8 @@ const router = createRouter({
     {
       path: '/dashbord',
       name: 'dashbord',
-      component: DashbordView
+      component: DashbordView,
+      /* meta: {authUser:true} */
     }
   ]
 })
