@@ -7,12 +7,12 @@ export const useAuthStore = defineStore('auth', {
   state: () => ({
     usersTab: [],
     activeSession: false,
-    userSession: '',
+    /* userSession: '',
     user: {
       fullname: null,
       email: null,
       password: null
-    }
+    } */
   }),
 
   watch: {},
@@ -20,7 +20,8 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     setAllUser() {
       try {
-        this.usersTab = JSON.parse(localStorage.getItem('usersTab')) || []
+        this.usersTab = JSON.parse(localStorage.getItem('usersTab'));
+        this.activeSession = JSON.parse(localStorage.getItem('activeSession')) || false;
       } catch (error) {
         console.log(error)
       }
@@ -66,12 +67,17 @@ export const useAuthStore = defineStore('auth', {
       //}
     },
 
-    showUser() {},
+    /* showUser() {},
     editUser() {},
-    removeUser() {},
+    removeUser() {}, */
 
     logoutUser() {
-      localStorage.removeItem('userSession')
+      console.log("1");
+      localStorage.removeItem('userSession');
+      console.log("2");
+      localStorage.removeItem('activeSession');
+      this.activeSession = false;
+      console.log("3");
     }
   }
 })

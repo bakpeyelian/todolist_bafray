@@ -13,7 +13,7 @@
                                 tasks, organise them, and filter tasks by status or date.
                             </p>
                             <p class="mt-8 md:mt-12">
-                                <RouterLink to="/boardview">
+                                <RouterLink to="/dashbord">
                                     <button type="button"
                                         class=" py-3 px-8 text-sm bg-yellow-900 hover:bg-gray-600 rounded text-white ">
                                         GO TO Boards

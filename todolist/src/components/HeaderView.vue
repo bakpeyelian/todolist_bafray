@@ -9,39 +9,55 @@
                 </div>
             </RouterLink>
             <div class="hidden md:flex gap-x-3">
-                <RouterLink to="/register">
-                    <button type="button"
-                        class=" py-3 px-8 text-sm bg-yellow-900 hover:bg-gray-600 rounded text-white ">
-                        Register
-                    </button>
-                </RouterLink>
-                <div>
-                    <RouterLink to="/" v-if="oklogout">
-                        <button type="button"
-                            class=" py-3 px-8 text-sm bg-yellow-900 hover:bg-gray-600 rounded text-white ">
+                <div v-if="isActive != false" class="flex space-x-4">
+                    <div>
+                        <RouterLink to="/dashbord">
+                            <button type="button"
+                                class=" py-4 px-8 text-sm bg-yellow-900 hover:bg-gray-600 rounded text-white ">
+                                GO TO Boards
+                            </button>
+                        </RouterLink>
+                    </div>
+                    <div>
+                        <button @click="deconnexion()" type="button"
+                            class=" py-4 px-8 text-sm bg-yellow-900 hover:bg-gray-600 rounded text-white ">
                             Logout
                         </button>
-                    </RouterLink>
-                    
-                    <RouterLink to="/login">
-                        <button type="button"
-                            class=" py-3 px-8 text-sm bg-yellow-900 hover:bg-gray-600 rounded text-white ">
-                            Login
-                        </button>
-                    </RouterLink>
+                    </div>
                 </div>
-                <RouterLink to="/boardview" v-if="oklogout">
-                    <button type="button"
-                        class=" py-3 px-8 text-sm bg-yellow-900 hover:bg-gray-600 rounded text-white ">
-                        GO TO Boards
-                    </button>
-                </RouterLink>
+                <div v-else class="flex space-x-4">
+                    <div>
+                        <RouterLink to="/register">
+                            <button type="button"
+                                class=" py-4 px-8 text-sm bg-yellow-900 hover:bg-gray-600 rounded text-white ">
+                                Register
+                            </button>
+                        </RouterLink>
+                    </div>
+                    <div>
+                        <RouterLink to="/login">
+                            <button type="button"
+                                class=" py-4 px-8 text-sm bg-yellow-900 hover:bg-gray-600 rounded text-white ">
+                                Login
+                            </button>
+                        </RouterLink>
+                    </div>
+                </div>
+
             </div>
         </div>
     </header>
 </template>
 
-<script>
+<script setup>
+import router from '@/router';
+import { useAuthStore } from '@/stores/Auth';
+const AuthStore = useAuthStore();
+var isActive = localStorage.getItem("activeSession") || false;
+console.log(isActive);
+function deconnexion(){
+    AuthStore.logoutUser();
+    router.push("/");
+}
 </script>
-
-<style></style>
+<style scoped></style>
