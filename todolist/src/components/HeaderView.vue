@@ -54,7 +54,7 @@ import router from '@/router';
 import { useAuthStore } from '@/stores/Auth';
 const AuthStore = useAuthStore();
 var isActive = localStorage.getItem("activeSession") || false;
-console.log(isActive);
+//console.log(isActive);
 function deconnexion(){
     AuthStore.logoutUser();
     router.push("/");

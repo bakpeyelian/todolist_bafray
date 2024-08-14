@@ -28,7 +28,7 @@
                             <div class="w-full md:w-full px-3 mb-6">
                                 <label class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
                                     htmlFor="startDate"><strong>a start date</strong></label>
-                                    <span class="text-yellow-900 "> {{ errors.startDate }} </span>
+                                <span class="text-yellow-900 "> {{ errors.startDate }} </span>
                                 <input v-model.trim="startDate"
                                     class="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none focus:border-[#080808]"
                                     type="date" name="startDate" required />
@@ -37,7 +37,7 @@
                             <div class="w-full md:w-full px-3 mb-6">
                                 <label class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
                                     htmlFor="EndDate"><strong>an expiry date</strong></label>
-                                    <span class="text-yellow-900 "> {{ errors.endDate }} </span>
+                                <span class="text-yellow-900 "> {{ errors.endDate }} </span>
                                 <input v-model.trim="endDate"
                                     class="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none focus:border-[#050505]"
                                     type="date" name="EndDate" required />
@@ -46,8 +46,8 @@
                             <div class="w-full md:w-full px-3 mb-6">
                                 <label class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
                                     htmlFor="priority"><strong>priority</strong></label>
-                                    <span class="text-yellow-900 "> {{ errors.priority }} </span>
-                                <select v-model="priority" 
+                                <span class="text-yellow-900 "> {{ errors.priority }} </span>
+                                <select v-model="priority"
                                     class="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none focus:border-[#050505]"
                                     required>
                                     <option value="">--Please choose an option--</option>
@@ -136,7 +136,7 @@
 </template>
 
 <script setup>
-//import { useTaskStore } from '@/stores/Task';
+import { useTaskStore } from '@/stores/Task';
 import HeaderView from '@/components/HeaderView.vue'
 import router from '@/router';
 import { ref, watch } from 'vue';
@@ -147,18 +147,18 @@ const startDate = ref('');
 const endDate = ref('');
 const priority = ref('');
 const errors = ref([]);
-//const taskStore = useTaskStore();
+const taskStore = useTaskStore();
 
-onBeforeMount(()=>{
+onBeforeMount(() => {
     let isConnect = localStorage.getItem("activeSession") || false;
-    if(isConnect == false){
+    if (isConnect == false) {
         router.push("/login");
     }
 })
 
-function addTask(){
-    console.log(errors.value.title);
-    if(!errors.value.title && !errors.value.description && !errors.value.startDate && !errors.value.endDate && !errors.value.priority){
+function addTask() {
+    //console.log(errors.value.title);
+    if (!errors.value.title && !errors.value.description && !errors.value.startDate && !errors.value.endDate && !errors.value.priority) {
         const onetask = {
             id: Date.now(),
             title: title.value,
@@ -167,9 +167,16 @@ function addTask(){
             endDate: endDate.value,
             priority: priority.value
         }
-        console.log(onetask)
-        //taskStore.addOneTask(onetask);
-    }else{
+        taskStore.addOneTask(onetask);
+        title.value = '';
+        description.value = '';
+        startDate.value = '';
+        endDate.value = '';
+        priority.value = '';
+        errors.value = [];
+        alert("Task added");
+        //router.push("/dashbord");
+    } else {
         alert("Invalid enter")
     }
 }
@@ -204,8 +211,8 @@ function verifyDescription(value) {
 watch(startDate, (value) => {
     verifystartDate(value)
 })
-function verifystartDate(value){
-    if (value > endDate.value ) {
+function verifystartDate(value) {
+    if (value > endDate.value) {
         errors.value["startDate"] = "The start date must not be greater than the end date.";
     } else {
         errors.value["startDate"] = '';
@@ -215,8 +222,8 @@ function verifystartDate(value){
 watch(endDate, (value) => {
     verifyendDate(value)
 })
-function verifyendDate(value){
-    if (startDate.value > value ) {
+function verifyendDate(value) {
+    if (startDate.value > value) {
         errors.value["endDate"] = "The end date must not be less than the start date.";
     } else {
         errors.value["endDate"] = '';
@@ -224,14 +231,14 @@ function verifyendDate(value){
     }
 }
 
-if(priority.value ===""){
+if (priority.value === "") {
     errors.value["priority"] = "The priority must be non-empty.";
 }
 
 watch(priority, (value) => {
     verifyPriority(value)
 })
-function verifyPriority(value){
+function verifyPriority(value) {
     if (value === "") {
         errors.value["priority"] = "The priority must be non-empty.";
     } else {

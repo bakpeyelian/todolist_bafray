@@ -72,12 +72,9 @@ export const useAuthStore = defineStore('auth', {
     removeUser() {}, */
 
     logoutUser() {
-      console.log("1");
       localStorage.removeItem('userSession');
-      console.log("2");
       localStorage.removeItem('activeSession');
       this.activeSession = false;
-      console.log("3");
     }
   }
 })
