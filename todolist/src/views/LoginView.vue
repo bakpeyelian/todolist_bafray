@@ -19,7 +19,7 @@
             <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
               <span class="text-sm text-red-500" v-if="errors.email">{{ errors.email }}</span>
               <div class="relative">
-                <input v-model="email" autocomplete="off" type="email"
+                <input v-model.trim="email" autocomplete="off" type="email"
                   class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
                   placeholder="Email address" />
                 <label for="email"
@@ -28,7 +28,7 @@
               </div>
               <span class="text-sm text-red-500" v-if="errors.password">{{ errors.password }}</span>
               <div class="gaps-5 relative">
-                <input v-model="password" autocomplete="off" type="password"
+                <input v-model.trim="password" autocomplete="off" type="password"
                   class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
                   placeholder="Password" />
                 <label for="password"
