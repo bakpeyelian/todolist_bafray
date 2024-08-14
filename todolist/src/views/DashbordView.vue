@@ -68,19 +68,19 @@
                 <div class="w-full lg:w-2/3 m-1 bg-white shadow-lg text-lg rounded-sm border border-gray-200">
                     <div class="overflow-x-auto rounded-lg p-3">
                         <div class=" flex  flex-col  md:flex-row justify-center  flex-wrap gap-4 mt-10  ">
-                            <div class="">
+                            <div v-for="element in taskStore.tasks" v-bind:key="element.id" class="">
                                 <div
                                     class="bg-white max-w-xs shadow-lg   mx-auto border-b-4 border-indigo-500 rounded-2xl overflow-hidden  hover:shadow-2xl transition duration-500 transform hover:scale-105 cursor-pointer">
                                     <div class="bg-indigo-500  flex h-20  items-center">
                                         <h1 class="text-white ml-4 border-2 py-2 px-4 rounded-full">1</h1>
-                                        <p class="ml-4 text-white uppercase">Title</p>
+                                        <p class="ml-4 text-white uppercase">Title {{ element.title }}</p>
                                     </div>
-                                    <p class="py-6 px-6 text-lg tracking-wide text-center">Description Goes here</p>
+                                    <p class="py-6 px-6 text-lg tracking-wide text-center">Description Goes here{{ element.description }} </p>
                                     <!-- <hr > -->
                                     <div class="flex justify-center px-5 mb-2 text-sm ">
                                         <button type="button"
                                             class="border border-indigo-500 text-indigo-500 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-white hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
-                                            Details
+                                            Details {{ element }}
                                         </button>
                                     </div>
                                 </div>
@@ -140,7 +140,7 @@ import { useTaskStore } from '@/stores/Task';
 import HeaderView from '@/components/HeaderView.vue'
 import router from '@/router';
 import { ref, watch } from 'vue';
-import { onBeforeMount } from 'vue';
+//import { onBeforeMount } from 'vue';
 const title = ref('');
 const description = ref('');
 const startDate = ref('');
@@ -148,13 +148,15 @@ const endDate = ref('');
 const priority = ref('');
 const errors = ref([]);
 const taskStore = useTaskStore();
+taskStore.getAllTasks();
+console.log(taskStore.tasks);
 
-onBeforeMount(() => {
+/* onBeforeMount(() => { */
     let isConnect = localStorage.getItem("activeSession") || false;
     if (isConnect == false) {
         router.push("/login");
     }
-})
+/* }) */
 
 function addTask() {
     //console.log(errors.value.title);
