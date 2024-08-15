@@ -68,8 +68,8 @@
                 <div class="w-full lg:w-2/3 m-1 bg-white shadow-lg text-lg rounded-sm border border-gray-200">
                     <div class="overflow-x-auto rounded-lg p-3">
                         <div class=" flex  flex-col  md:flex-row justify-center  flex-wrap gap-4 mt-10  ">
-                            <div v-for="element in taskStore.tasks" v-bind:key="element.id" class="">
-                                <div
+                            <div v-for="element in taskStore.tasks" v-bind:key="element.id" class="" >
+                                <div v-if="compareEmail == element.createdBy"
                                     class="bg-white max-w-xs shadow-lg   mx-auto border-b-4 border-yellow-900 rounded-2xl overflow-hidden  hover:shadow-2xl transition duration-500 transform hover:scale-105 cursor-pointer">
                                     <div class="bg-yellow-900  flex h-20  items-center">
                                         <h1 class="text-white ml-4 border-2 py-2 px-4 rounded-full">{{ element.priority
@@ -159,6 +159,7 @@ const taskStore = useTaskStore();
 taskStore.getAllTasks();
 console.log(taskStore.tasks);
 //console.log(localStorage.getItem("activeSession"))
+const compareEmail = JSON.parse(localStorage.activeSession).email
 
 /* onBeforeMount(() => { */
 let isConnect = localStorage.getItem("activeSession") || false;
