@@ -5,45 +5,67 @@ import { defineStore } from 'pinia'
 export const useTaskStore = defineStore('task', {
   state: () => ({
     tasks: [],
-    task: '',
+    task: ''
   }),
 
   watch: {},
 
   actions: {
-    getAllTasks(){
-      this.tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    getAllTasks() {
+      this.tasks = JSON.parse(localStorage.getItem('tasks')) || []
     },
-    addOneTask(task){
-      this.tasks.unshift(task);
-      localStorage.setItem("tasks",JSON.stringify(this.tasks));
-      this.getAllTasks();
+    addOneTask(task) {
+      this.tasks.unshift(task)
+      localStorage.setItem('tasks', JSON.stringify(this.tasks))
+      this.getAllTasks()
     },
-    deleteOneTask(id){
-      this.tasks = this.tasks.filter((object)=>{
-        return object.id !== id;
-      });
-      localStorage.setItem("tasks",JSON.stringify(this.tasks));
-      alert("Task delete sucessful")
+    deleteOneTask(id) {
+      this.tasks = this.tasks.filter((object) => {
+        return object.id !== id
+      })
+      localStorage.setItem('tasks', JSON.stringify(this.tasks))
+      alert('Task delete sucessful')
     },
-    getOneTask(id){
-      this.task = this.tasks.filter((object)=>{
-        return object.id = id;
-      });
-      if(this.task){
-        console.log("yes")
-      }else{
-        console.log("no")
+    getOneTask(id) {
+      const resultat = this.tasks.indexOf(
+        this.tasks.find((taskUpadate) => taskUpadate.id == id)
+      )
+      console.log(resultat)
+      if (resultat >= 0) {
+        this.task = this.tasks[resultat]
+        localStorage.setItem('tasks', JSON.stringify(this.tasks))
+        console("yes")
+      } else {
+        console("no")
       }
     },
-    editOneTask(task){
-      let positionTask = this.tasks.findIndex(()=>{
-        return this.task.id = task.id;
-      });
-      if(positionTask){
-        this.tasks[positionTask] = task
-      }else{
-        console.log("no");
+    /* editOneTask(task) {
+      this.getOneTask(task.id)
+      const resultat = this.tasks.indexOf(
+        this.tasks.find((taskUpadate) => taskUpadate.id == task.id)
+      )
+      console.log(resultat)
+      if (resultat >= 0) {
+        this.tasks[resultat] = task
+        localStorage.setItem('tasks', JSON.stringify(this.tasks))
+        alert('Task modify successfully')
+      } else {
+        alert('Update of the failed task')
+      }
+    } */
+    editOneTask(task) {
+      console.log(task)
+      console.log(this.tasks)
+      const resultat = this.tasks.indexOf(
+        this.tasks.find((taskUpadate) => taskUpadate.id == task.id)
+      )
+      console.log(resultat)
+      if (resultat >= 0) {
+        this.tasks[resultat] = task
+        localStorage.setItem('tasks', JSON.stringify(this.tasks))
+        alert('Task modify successfully')
+      } else {
+        alert('Update of the failed task')
       }
     }
   }

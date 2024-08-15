@@ -68,7 +68,7 @@
                 <div class="w-full lg:w-2/3 m-1 bg-white shadow-lg text-lg rounded-sm border border-gray-200">
                     <div class="overflow-x-auto rounded-lg p-3">
                         <div class=" flex  flex-col  md:flex-row justify-center  flex-wrap gap-4 mt-10  ">
-                            <div v-for="element in taskStore.tasks" v-bind:key="element.id" class="" >
+                            <div v-for="element in taskStore.tasks" v-bind:key="element.id" class="">
                                 <div v-if="compareEmail == element.createdBy"
                                     class="bg-white max-w-xs shadow-lg   mx-auto border-b-4 border-yellow-900 rounded-2xl overflow-hidden  hover:shadow-2xl transition duration-500 transform hover:scale-105 cursor-pointer">
                                     <div class="bg-yellow-900  flex h-20  items-center">
@@ -77,18 +77,45 @@
                                         <p class="ml-4 text-white uppercase"> {{ element.title.slice(0, 10) }} ... </p>
                                     </div>
                                     <p class="py-6 px-6 text-lg tracking-wide text-center">
-                                        <strong>Start Date</strong> :
+                                        <strong>Start Date</strong> : <br>
                                         {{ moment(element.startDate).format('MMMM Do YYYY') }}
-                                        <br>
-                                        <strong>End Date</strong> : 
+                                        <br> <br>
+                                        <strong>End Date</strong> : <br>
                                         {{ moment(element.endDate).format('MMMM Do YYYY') }}
                                     </p>
 
-                                    <div class="flex justify-center px-5 mb-2 text-sm ">
-                                        <button type="button"
-                                            class="border border-yellow-900 text-back-500 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-white hover:bg-yellow-900 focus:outline-none focus:shadow-outline">
-                                            See more
-                                        </button>
+                                    <div class="flex justify-between px-5 mb-2 text-sm ">
+                                        <RouterLink :to="`/show/${element.id}`">
+                                            <button type="button"
+                                                class="border border-yellow-900 text-back-500 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-white hover:bg-yellow-900 focus:outline-none focus:shadow-outline">
+                                                See more
+                                            </button>
+                                        </RouterLink>
+                                        <div>
+                                            <div>
+                                                <RouterLink :to="`/edit/${element.id}`">
+                                                    <button
+                                                        class="border border-yellow-900 text-back-500 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-white hover:bg-yellow-900 focus:outline-none focus:shadow-outline">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                            fill="currentColor" class="bi bi-pencil-square"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                            <path fill-rule="evenodd"
+                                                                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                                                        </svg>
+                                                    </button>
+                                                </RouterLink>
+                                                <button @click="taskStore.deleteOneTask(element.id)"
+                                                    class="border border-yellow-900 text-back-500 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-white hover:bg-yellow-900 focus:outline-none focus:shadow-outline">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -135,9 +162,27 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
+        </div>
+        <!-- component -->
+        <div v-if="show"
+            class="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-50 py-10">
+            <div class="max-h-full w-full max-w-xl overflow-y-auto sm:rounded-2xl bg-white">
+                <div class="w-full">
+                    <div class="m-8 my-20 max-w-[400px] mx-auto">
+                        <div class="mb-8">
+                            <h1 class="mb-4 text-3xl font-extrabold">Turn on notifications</h1>
+                            <p class="text-gray-600">Get the most out of Twitter by staying up to date with what's
+                                happening.</p>
+                        </div>
+                        <div class="space-y-4">
+                            <button class="p-3 bg-black rounded-full text-white w-full font-semibold">Allow
+                                notifications</button>
+                            <button class="p-3 bg-white border rounded-full w-full font-semibold">Skip for now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -154,6 +199,7 @@ const description = ref('');
 const startDate = ref('');
 const endDate = ref('');
 const priority = ref('');
+const show = ref(false);
 const errors = ref([]);
 const taskStore = useTaskStore();
 taskStore.getAllTasks();

@@ -28,14 +28,14 @@ export const useAuthStore = defineStore('auth', {
     },
 
     addUser(user) {
-      try {
+      /* try { */
         this.usersTab.unshift(user)
         localStorage.setItem('usersTab', JSON.stringify(this.usersTab))
         this.usersTab = JSON.parse(localStorage.getItem('usersTab'))
         return true
-      } catch (error) {
+      /* } catch (error) {
         console.log(error)
-      }
+      } */
     },
 
     connectUser(user) {

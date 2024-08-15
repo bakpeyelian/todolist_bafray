@@ -9,7 +9,9 @@
         <p class="text-2xl font-medium text-gray-600 mb-6">Page Not Found</p>
         <a href="/"
             class="px-4 py-2 font-medium text-white bg-gray-500 rounded-md hover:bg-gray-700 transition-all duration-200 ease-in-out">
-            Go Home
+            <RouterLink to="/" >
+              Go Home
+            </RouterLink>
         </a>
     </div>
   </div>
