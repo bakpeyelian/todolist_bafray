@@ -70,23 +70,30 @@
                         <div class=" flex  flex-col  md:flex-row justify-center  flex-wrap gap-4 mt-10  ">
                             <div v-for="element in taskStore.tasks" v-bind:key="element.id" class="">
                                 <div
-                                    class="bg-white max-w-xs shadow-lg   mx-auto border-b-4 border-indigo-500 rounded-2xl overflow-hidden  hover:shadow-2xl transition duration-500 transform hover:scale-105 cursor-pointer">
-                                    <div class="bg-indigo-500  flex h-20  items-center">
-                                        <h1 class="text-white ml-4 border-2 py-2 px-4 rounded-full">1</h1>
-                                        <p class="ml-4 text-white uppercase">Title {{ element.title }}</p>
+                                    class="bg-white max-w-xs shadow-lg   mx-auto border-b-4 border-yellow-900 rounded-2xl overflow-hidden  hover:shadow-2xl transition duration-500 transform hover:scale-105 cursor-pointer">
+                                    <div class="bg-yellow-900  flex h-20  items-center">
+                                        <h1 class="text-white ml-4 border-2 py-2 px-4 rounded-full">{{ element.priority
+                                            }}</h1>
+                                        <p class="ml-4 text-white uppercase"> {{ element.title.slice(0, 10) }} ... </p>
                                     </div>
-                                    <p class="py-6 px-6 text-lg tracking-wide text-center">Description Goes here{{ element.description }} </p>
-                                    <!-- <hr > -->
+                                    <p class="py-6 px-6 text-lg tracking-wide text-center">
+                                        <strong>Start Date</strong> :
+                                        {{ moment(element.startDate).format('MMMM Do YYYY') }}
+                                        <br>
+                                        <strong>End Date</strong> : 
+                                        {{ moment(element.endDate).format('MMMM Do YYYY') }}
+                                    </p>
+
                                     <div class="flex justify-center px-5 mb-2 text-sm ">
                                         <button type="button"
-                                            class="border border-indigo-500 text-indigo-500 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-white hover:bg-indigo-600 focus:outline-none focus:shadow-outline">
-                                            Details {{ element }}
+                                            class="border border-yellow-900 text-back-500 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-white hover:bg-yellow-900 focus:outline-none focus:shadow-outline">
+                                            See more
                                         </button>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="">
+                            <!--                             <div class="">
                                 <div
                                     class="bg-white max-w-xs mx-auto rounded-2xl  border-b-4 border-green-500 overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-105 cursor-pointer">
                                     <div class="h-20 bg-green-500 flex items-center ">
@@ -96,7 +103,7 @@
                                         </p>
                                     </div>
                                     <p class="py-6 px-6 text-lg tracking-wide text-center">Description Goes Here</p>
-                                    <!-- <hr > -->
+                                    
                                     <div class="flex justify-center px-5 mb-2 text-sm ">
                                         <button type="button"
                                             class="border border-green-500 text-green-500 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-white hover:bg-green-600 focus:outline-none focus:shadow-outline">
@@ -116,7 +123,7 @@
                                         </p>
                                     </div>
                                     <p class="py-6  px-6 text-lg tracking-wide text-center">Description Goes Here</p>
-                                    <!-- <hr > -->
+                                    
                                     <div class="flex justify-center px-5 mb-2 text-sm ">
                                         <button type="button"
                                             class="border border-red-500 text-red-500 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-white hover:bg-red-600 focus:outline-none focus:shadow-outline">
@@ -124,7 +131,7 @@
                                         </button>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -140,6 +147,7 @@ import { useTaskStore } from '@/stores/Task';
 import HeaderView from '@/components/HeaderView.vue'
 import router from '@/router';
 import { ref, watch } from 'vue';
+import moment from 'moment';
 //import { onBeforeMount } from 'vue';
 const title = ref('');
 const description = ref('');
@@ -150,12 +158,13 @@ const errors = ref([]);
 const taskStore = useTaskStore();
 taskStore.getAllTasks();
 console.log(taskStore.tasks);
+//console.log(localStorage.getItem("activeSession"))
 
 /* onBeforeMount(() => { */
-    let isConnect = localStorage.getItem("activeSession") || false;
-    if (isConnect == false) {
-        router.push("/login");
-    }
+let isConnect = localStorage.getItem("activeSession") || false;
+if (isConnect == false) {
+    router.push("/login");
+}
 /* }) */
 
 function addTask() {
@@ -167,7 +176,8 @@ function addTask() {
             description: description.value,
             startDate: startDate.value,
             endDate: endDate.value,
-            priority: priority.value
+            priority: priority.value,
+            createdBy: JSON.parse(localStorage.activeSession).email
         }
         taskStore.addOneTask(onetask);
         title.value = '';

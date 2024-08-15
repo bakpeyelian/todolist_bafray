@@ -7,12 +7,12 @@ export const useAuthStore = defineStore('auth', {
   state: () => ({
     usersTab: [],
     activeSession: false,
-    /* userSession: '',
+    userSession: '',
     user: {
       fullname: null,
       email: null,
       password: null
-    } */
+    }
   }),
 
   watch: {},

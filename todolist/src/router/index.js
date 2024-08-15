@@ -27,7 +27,7 @@ const router = createRouter({
       name: 'dashbord',
       component: DashbordView,
       /* meta: {authUser:true} */
-    }
+    },
   ]
 })
 
