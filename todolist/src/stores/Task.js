@@ -45,20 +45,6 @@ export const useTaskStore = defineStore('task', {
         console.log("no")
       }
     },
-    /* editOneTask(task) {
-      this.getOneTask(task.id)
-      const resultat = this.tasks.indexOf(
-        this.tasks.find((taskUpadate) => taskUpadate.id == task.id)
-      )
-      console.log(resultat)
-      if (resultat >= 0) {
-        this.tasks[resultat] = task
-        localStorage.setItem('tasks', JSON.stringify(this.tasks))
-        alert('Task modify successfully')
-      } else {
-        alert('Update of the failed task')
-      }
-    } */
     editOneTask(task) {
       console.log(task)
       console.log(this.tasks)
