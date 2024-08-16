@@ -20,7 +20,7 @@
                                 <label class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
                                     htmlFor="title"><strong>title</strong></label>
                                 <span class="text-yellow-900 "> {{ errors.title }} </span>
-                                <input v-model.trim="title" value="`{{ element.title }}`"
+                                <input v-model.trim="title"
                                     class="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none focus:border-[#2b2c2a]"
                                     type="text" name="title" required />
                             </div>
@@ -106,15 +106,17 @@ import { useRoute } from 'vue-router';
 //import moment from 'moment';
 //import { onBeforeMount } from 'vue';
 const route = useRoute();
-const title = ref('');
-const description = ref('');
-const startDate = ref('');
-const endDate = ref('');
-const priority = ref('');
 const errors = ref([]);
 const taskStore = useTaskStore();
 taskStore.getAllTasks();
-console.log(taskStore.tasks);
+taskStore.getOneTask(route.params.id);
+console.log(taskStore.task);
+const title = ref(taskStore.task.title);
+const description = ref(taskStore.task.description);
+const startDate = ref(taskStore.task.startDate);
+const endDate = ref(taskStore.task.endDate);
+const priority = ref(taskStore.task.priority);
+
 
 /* onBeforeMount(() => { */
 let isConnect = localStorage.getItem("activeSession") || false;

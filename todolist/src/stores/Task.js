@@ -34,6 +34,7 @@ export const useTaskStore = defineStore('task', {
       console.log(resultat)
       if (resultat >= 0) {
         this.task = this.tasks[resultat]
+        console.log(this.task);
         localStorage.setItem('tasks', JSON.stringify(this.tasks))
         console.log("yes")
       } else {
