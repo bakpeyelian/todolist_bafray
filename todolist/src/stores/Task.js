@@ -20,12 +20,16 @@ export const useTaskStore = defineStore('task', {
       this.getAllTasks()
     },
     deleteOneTask(id) {
-      prompt("Are you sur to delete task ?");
-      this.tasks = this.tasks.filter((object) => {
-        return object.id !== id
-      })
-      localStorage.setItem('tasks', JSON.stringify(this.tasks))
-      alert('Task delete sucessful')
+      var choix = confirm("Are you sur to delete task ?");
+      if(choix){
+        this.tasks = this.tasks.filter((object) => {
+          return object.id !== id
+        });
+        localStorage.setItem('tasks', JSON.stringify(this.tasks));
+        alert('Task delete sucessful');
+      }else{
+        alert('Task delete failed');
+      }
     },
     getOneTask(id) {
       const resultat = this.tasks.indexOf(
