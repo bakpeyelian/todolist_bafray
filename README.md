@@ -1,28 +1,21 @@
 # todolist
 
-This template should help get you started developing with Vue 3 in Vite.
+Dans le cadre des rattrapages au sein du parcours de la Coding Académy de EPITECH, j'ai developpé une application de gestion des tâches permettant aux utilisateurs de gérer efficacement leurs listes de tâches. Les utilisateurs pourront créer, lire, mettre à jour et supprimer des tâches, les organiser. L'application intégre également un système d'authentification pour que chaque utilisateur puisse
+accéder et gérer ses propres tâches. Les données sont persistées pour garantir que les tâches soient conservées même après un rechargement de la page.
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+## Configuration du projet
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### Compilation et transfert à chaud pour le développement
 
 ```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
+### Compiler et minimiser pour la production
 
 ```sh
 npm run build
@@ -32,26 +25,4 @@ npm run build
 
 ```sh
 npm run test:unit
-```
-
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
-
-```sh
-npm run test:e2e:dev
-```
-
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
-
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
-
-```sh
-npm run build
-npm run test:e2e
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
 ```
