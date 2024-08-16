@@ -97,7 +97,7 @@ const route = useRoute();
 const ID = route.params.id
 taskStore.getAllTasks();
 taskStore.getOneTask(ID);
-console.log(taskStore.task)
+//console.log(taskStore.task)
 //console.log(taskStore.tasks);
 
 onBeforeMount(() => {

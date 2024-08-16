@@ -138,7 +138,6 @@ const fullname = ref('');
 const email = ref('');
 const password = ref('');
 const passwordConfirm = ref('');
-const coche = ref('');
 const errors = ref([]);
 
 
@@ -203,7 +202,7 @@ watch(passwordConfirm, (value) => {
 
 //verification avant soumission
 function SubmitUser() {
-  console.log(fullname, email, password, passwordConfirm, coche)
+  //console.log(fullname, email, password, passwordConfirm, coche)
   if (fullname.value.length == 0 && email.value.length == 0 && password.value.length == 0) {
     errors.value['password'] = "invalid password"
     errors.value['email'] = " invalid email"
@@ -212,7 +211,7 @@ function SubmitUser() {
 
   if (!errors.value.fullname && !errors.value.email && !errors.value.password && !errors.value.passwordConfirm && fullname.value.length > 0 && email.value.length > 0 && password.value.length > 0) {
     const passwordhash = bcrypt.hashSync(password.value);
-    console.log(passwordhash)
+    //console.log(passwordhash)
     const user = ref({
       fullname: fullname.value,
       email: email.value,

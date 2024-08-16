@@ -110,7 +110,7 @@ const errors = ref([]);
 const taskStore = useTaskStore();
 taskStore.getAllTasks();
 taskStore.getOneTask(route.params.id);
-console.log(taskStore.task);
+//console.log(taskStore.task);
 const title = ref(taskStore.task.title);
 const description = ref(taskStore.task.description);
 const startDate = ref(taskStore.task.startDate);
@@ -137,7 +137,7 @@ function updateTask() {
             priority: priority.value,
             createdBy: JSON.parse(localStorage.activeSession).email
         }
-        console.log(onetask);
+        //console.log(onetask);
         taskStore.editOneTask(onetask);
         title.value = '';
         description.value = '';

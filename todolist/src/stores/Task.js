@@ -4,7 +4,7 @@ import { defineStore } from 'pinia'
 
 export const useTaskStore = defineStore('task', {
   state: () => ({
-    tasks: [],
+    tasks: [{essaie:"essaie"}],
     task: ''
   }),
 
@@ -35,23 +35,23 @@ export const useTaskStore = defineStore('task', {
       const resultat = this.tasks.indexOf(
         this.tasks.find((taskUpadate) => taskUpadate.id == id)
       )
-      console.log(resultat)
+      //console.log(resultat)
       if (resultat >= 0) {
         this.task = this.tasks[resultat]
-        console.log(this.task);
+        //console.log(this.task);
         localStorage.setItem('tasks', JSON.stringify(this.tasks))
-        console.log("yes")
+        //console.log("yes")
       } else {
-        console.log("no")
+        //console.log("no")
       }
     },
     editOneTask(task) {
-      console.log(task)
-      console.log(this.tasks)
+      //console.log(task)
+      //console.log(this.tasks)
       const resultat = this.tasks.indexOf(
         this.tasks.find((taskUpadate) => taskUpadate.id == task.id)
       )
-      console.log(resultat)
+      //console.log(resultat)
       if (resultat >= 0) {
         this.tasks[resultat] = task
         localStorage.setItem('tasks', JSON.stringify(this.tasks))
