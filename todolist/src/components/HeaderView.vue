@@ -2,7 +2,7 @@
     <header>
         <div class="container flex flex-col sm:flex-row justify-between items-center mx-auto py-4 px-8">
             <RouterLink to="/">
-                <div class="flex items-center text-3xl text-gray-500 font-bold">
+                <div class="flex items-center text-3xl text-gray-500 font-bold w-15">
                     <RouterLink to="/">
                         <img src="../../public/logo ToDo.png" alt="Logo du site" class="w-6/12">
                     </RouterLink>

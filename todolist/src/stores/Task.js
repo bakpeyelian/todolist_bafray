@@ -20,6 +20,7 @@ export const useTaskStore = defineStore('task', {
       this.getAllTasks()
     },
     deleteOneTask(id) {
+      prompt("Are you sur to delete task ?");
       this.tasks = this.tasks.filter((object) => {
         return object.id !== id
       })
@@ -34,9 +35,9 @@ export const useTaskStore = defineStore('task', {
       if (resultat >= 0) {
         this.task = this.tasks[resultat]
         localStorage.setItem('tasks', JSON.stringify(this.tasks))
-        console("yes")
+        console.log("yes")
       } else {
-        console("no")
+        console.log("no")
       }
     },
     /* editOneTask(task) {
